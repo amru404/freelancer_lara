@@ -47,8 +47,8 @@
                         <div class="col-lg-3 col-md-2">
                             <!-- Logo -->
                             <div class="logo">
-                                <!-- <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a> -->
-                            </div>  
+                                <a href="index.html"><img src="assets/img/logo/logo2.png" alt="12" height="60px"></a>
+                            </div>   
                         </div>
                         <div class="col-lg-9 col-md-9">
                             <div class="menu-wrapper">
@@ -69,14 +69,35 @@
                                             </li>
                                             <li><a href="contact.html">Contact</a></li>
                                         
-                                        </ul>
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
                                     
                                     </nav>
-                                </div>          
-                                <div class="header-btn d-none f-right d-lg-block">
-                                    <a href="#" class="btn head-btn1">Register</a>
-                                    <a href="#" class="btn head-btn2">Login</a>
-                                </div>
+                                </div>    
                         </div>
                         <!-- Mobile Menu -->
                         <div class="col-12">
